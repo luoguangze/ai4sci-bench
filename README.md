@@ -1,18 +1,19 @@
-# SciAgent Bench: example tasks
+# AI4Sci Bench
 
-Six tasks from the SciAgent Bench accepted pool (Scale AI x Georgia Tech) that show the three task tiers and the four properties we look for in a task. Task and verifier descriptions only; the task packages, data and sealed answers stay private.
+Three scientific task examples, with one task per tier. Each card contains its references, inputs, task description, and verification criteria.
 
-**Page:** https://luoguangze.github.io/sciagent-bench-examples/
+**Page:** https://luoguangze.github.io/ai4sci-bench/
 
-| Task | Tier | Domain | Budget per trial | Mean pass@1 (3 agents x 3 trials) | Verifiable as |
-|---|---|---|---|---|---|
-| optical-mapping-activation-maps | T2 | clinical, health and population (cardiac electrophysiology) | 4 vCPU, 16 GB, 2 h | 0.00 | ground truth: the expert's own maps |
-| phosphopeptide-evidence-inference | T3 | life sciences (proteomics) | 8 vCPU, 64 GB, 1 A10G, 8 h | 0.11 | sealed truth panel, frozen comparators, absolute error-rate gate |
-| strain-resolved-assembly | T3 | life sciences (metagenomics) | 16 vCPU, 64 GB, 8 h | 0.00 | sealed truth genomes, frozen assemblers, quality gates |
-| rare-event-committor-transfer | T1 | mathematics, statistics and scientific ML | 4 vCPU, 8 GB, 2 h | 0.11 | exact generator truth, paired sign test vs. frozen baselines |
-| constitutive-protocol-information | T1 | chemistry and materials (rheology) | 4 vCPU, 8 GB, 2 h | 0.22 | exact generator truth, paired sign test vs. frozen baselines |
-| transient-isotopomer-experiment-design | T1 | life sciences (metabolic tracing) | 4 vCPU, 8 GB, 2 h | 0.11 | exact generator truth, paired sign test vs. frozen baselines |
+| Tier | Task | Domain |
+| --- | --- | --- |
+| 1 — Simulated systems with known answers | [constitutive-protocol-information](https://luoguangze.github.io/ai4sci-bench/#constitutive) | Chemistry and materials: rheology |
+| 2 — Expert analysis of real data | [optical-mapping-activation-maps](https://luoguangze.github.io/ai4sci-bench/#optical-mapping) | Clinical and health sciences: cardiac electrophysiology |
+| 3 — Open-ended research | [strain-resolved-assembly](https://luoguangze.github.io/ai4sci-bench/#strain-assembly) | Life sciences: metagenomics |
 
-What we look for: tasks that are (1) practical and useful for an existing domain, (2) agentic by design, (3) not impossible and not compute-heavy but stumping current models, and (4) verifiable as a ground-truth final answer or as concrete rubrics. Tiers: T1 simulated systems with known answers (~40 %), T2 expert analysis of real data (~40 %), T3 open-ended research problems (~20 %).
+## Development
 
-Pass rates come from three frontier coding agents (Claude Fable 5.1, GPT-6 Astra, Gemini 3.7 Flash), three trials each, graded by the task's own verifier; provider-side refusals are excluded and reported separately. Descriptions were abbreviated from the maintainers' READMEs on 2026-09-28.
+Static HTML, CSS, and JavaScript with no build step or external dependencies. Serve locally with `python3 -m http.server 8000` and open `http://localhost:8000`.
+
+Tier tabs support keyboard navigation (Left/Right, Home/End), browser history, and direct task links. Original task fragments and full task-name fragments both work. With JavaScript disabled, all three cards remain readable; printing includes all three.
+
+GitHub Pages deploys from the root of `main`.

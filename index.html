@@ -1,193 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SciAgent Bench: example tasks</title>
-<meta name="description" content="Six example tasks from the SciAgent Bench accepted pool, covering the three task tiers and the four properties we look for. Task and verifier descriptions only.">
-<style>
-  :root { --ink:#1b1f24; --muted:#5b6470; --line:#e3e6ea; --bg:#ffffff; --card:#f7f8fa; --t1:#2f6fed; --t2:#0f9d58; --t3:#c2410c; --chip:#eef2f7; }
-  * { box-sizing: border-box; }
-  body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); line-height:1.55; }
-  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; }
-  header h1 { font-size: 2rem; margin: 0 0 6px; letter-spacing: -0.01em; }
-  header p.sub { color: var(--muted); margin: 0 0 22px; font-size: 1.05rem; }
-  h2 { font-size: 1.35rem; margin: 40px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
-  h3 { font-size: 1.15rem; margin: 0 0 4px; }
-  p { margin: 8px 0; }
-  ul { margin: 6px 0 6px 20px; }
-  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 10px 0 6px; }
-  th, td { border: 1px solid var(--line); padding: 7px 9px; vertical-align: top; text-align: left; }
-  th { background: var(--card); font-weight: 600; }
-  td.c { text-align: center; }
-  .tier { display:inline-block; font-size: 0.78rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; color:#fff; vertical-align: middle; }
-  .t1 { background: var(--t1); } .t2 { background: var(--t2); } .t3 { background: var(--t3); }
-  .chip { display:inline-block; font-size: 0.78rem; background: var(--chip); color: var(--muted); padding: 2px 8px; border-radius: 999px; margin-right: 4px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-left-width: 5px; border-radius: 8px; padding: 18px 20px 14px; margin: 18px 0; }
-  .card.t1 { border-left-color: var(--t1); background: var(--card); } .card.t2 { border-left-color: var(--t2); background: var(--card); } .card.t3 { border-left-color: var(--t3); background: var(--card); }
-  .card .meta { color: var(--muted); font-size: 0.9rem; margin: 2px 0 10px; }
-  .card .hook { font-size: 1.02rem; margin: 6px 0 12px; }
-  .card dl { margin: 0; }
-  .card dt { font-weight: 600; margin-top: 10px; }
-  .card dd { margin: 2px 0 0 0; }
-  .why { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 0.93rem; }
-  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; background: #eef0f3; padding: 1px 4px; border-radius: 4px; }
-  footer { margin-top: 48px; color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); padding-top: 14px; }
-  .legend span { margin-right: 14px; }
-  @media (max-width: 640px) { table { font-size: 0.82rem; } th, td { padding: 5px 6px; } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f9">
+  <title>AI4Sci Bench — Task examples</title>
+  <meta name="description" content="Explore three AI4Sci Bench tasks: simulated systems, expert analysis of real data, and open-ended research. References, inputs, tasks, and verification.">
+  <link rel="canonical" href="https://luoguangze.github.io/ai4sci-bench/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="tabs.js" defer></script>
 </head>
 <body>
-<main>
-<header>
-  <h1>SciAgent Bench: example tasks</h1>
-  <p class="sub">Six tasks from the accepted pool that show the three task tiers and the four properties we look for. Task and verifier descriptions only; the task packages, data and sealed answers stay private.</p>
-  <p class="meta"><span class="chip">Scale AI &times; Georgia Tech</span> <span class="chip">updated 2026-09-28</span> <span class="chip">descriptions abbreviated from the maintainers' READMEs</span></p>
-</header>
+  <main class="workspace">
+    <header class="masthead">
+      <h1><svg class="brand-mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect width="30" height="30" rx="9" fill="currentColor"/><path d="M7 20 12.5 9 18 20M9 16h7M19 9h4m-4 5h4m-4 6h4" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>AI4Sci <span>Bench</span></h1>
+      <span class="masthead-label">Task examples</span>
+    </header>
 
-<h2>What we are looking for</h2>
-<p>Every task ships as a sandboxed environment with data, domain tools and code execution; a compute and wall-clock budget; a programmatic verifier; and ground truth established analytically, by expert work, or by a frozen evaluation suite. We look for tasks that are</p>
-<ol>
-  <li><strong>practical and useful</strong> for an existing domain: a passing solution would speed up research that is happening now;</li>
-  <li><strong>agentic by design</strong>: open-source tools, long-horizon multi-step work, files modified and files delivered, iteration on intermediate results;</li>
-  <li><strong>not impossible and not compute-heavy, but stumping current models</strong>: a few domain experts could solve them with the context given, and current agents mostly cannot;</li>
-  <li><strong>verifiable</strong> as a ground-truth final answer or as concrete rubrics.</li>
-</ol>
-<p class="legend"><span class="tier t1">Tier 1</span> simulated systems with known answers (about 40&nbsp;% of the pool): data come from a generator, the answer is exact, fresh instances can be made on demand and confounds can be decorrelated from the target. <span class="tier t2">Tier 2</span> expert analysis of real data (about 40&nbsp;%): the agent runs a full analysis the way a domain expert would and is compared with an expert pipeline, a reference catalogue or an independent measurement. <span class="tier t3">Tier 3</span> open-ended research problems (about 20&nbsp;%): improve on existing work within a fixed budget, scored on a hidden panel the agent never sees.</p>
+    <nav class="tier-tabs" aria-label="Task tiers">
+      <a class="tier-tab" id="tab-constitutive" href="#constitutive" data-panel="constitutive">
+        <span class="tab-number">01</span><span><span class="tab-label">Tier 1</span><span class="tab-description">Simulated systems</span></span>
+        <svg class="tab-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 4 4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="tier-tab" id="tab-optical-mapping" href="#optical-mapping" data-panel="optical-mapping">
+        <span class="tab-number">02</span><span><span class="tab-label">Tier 2</span><span class="tab-description">Expert analysis of real data</span></span>
+        <svg class="tab-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 4 4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="tier-tab" id="tab-strain-assembly" href="#strain-assembly" data-panel="strain-assembly">
+        <span class="tab-number">03</span><span><span class="tab-label">Tier 3</span><span class="tab-description">Open-ended research</span></span>
+        <svg class="tab-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 4 4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </nav>
 
-<h2>Coverage at a glance</h2>
-<table>
-  <thead><tr><th>Task</th><th>Tier</th><th>Domain</th><th>Budget per trial</th><th class="c">Practical</th><th class="c">Agentic</th><th class="c">Stumps models<br><small>mean pass@1</small></th><th>Verifiable as</th></tr></thead>
-  <tbody>
-    <tr><td><a href="#optical-mapping">optical-mapping-activation-maps</a></td><td><span class="tier t2">T2</span></td><td>clinical, health and population (cardiac electrophysiology)</td><td>4 vCPU, 16 GB, 2 h</td><td class="c">&#10003;</td><td class="c">&#10003;</td><td class="c">0.00</td><td>ground truth: the expert's own maps</td></tr>
-    <tr><td><a href="#phosphopeptide">phosphopeptide-evidence-inference</a></td><td><span class="tier t3">T3</span></td><td>life sciences (proteomics)</td><td>8 vCPU, 64 GB, 1 A10G, 8 h</td><td class="c">&#10003;</td><td class="c">&#10003;</td><td class="c">0.11</td><td>sealed truth panel, frozen comparators, absolute error-rate gate</td></tr>
-    <tr><td><a href="#strain-assembly">strain-resolved-assembly</a></td><td><span class="tier t3">T3</span></td><td>life sciences (metagenomics)</td><td>16 vCPU, 64 GB, 8 h</td><td class="c">&#10003;</td><td class="c">&#10003;</td><td class="c">0.00</td><td>sealed truth genomes, frozen assemblers, quality gates</td></tr>
-    <tr><td><a href="#rare-event">rare-event-committor-transfer</a></td><td><span class="tier t1">T1</span></td><td>mathematics, statistics and scientific ML</td><td>4 vCPU, 8 GB, 2 h</td><td class="c">&#10003;</td><td class="c">&#10003;</td><td class="c">0.11</td><td>exact generator truth, paired sign test vs. frozen baselines</td></tr>
-    <tr><td><a href="#constitutive">constitutive-protocol-information</a></td><td><span class="tier t1">T1</span></td><td>chemistry and materials (rheology)</td><td>4 vCPU, 8 GB, 2 h</td><td class="c">&#10003;</td><td class="c">&#10003;</td><td class="c">0.22</td><td>exact generator truth, paired sign test vs. frozen baselines</td></tr>
-    <tr><td><a href="#isotopomer">transient-isotopomer-experiment-design</a></td><td><span class="tier t1">T1</span></td><td>life sciences (metabolic tracing)</td><td>4 vCPU, 8 GB, 2 h</td><td class="c">&#10003;</td><td class="c">&#10003;</td><td class="c">0.11</td><td>exact generator truth, paired sign test vs. frozen baselines</td></tr>
-  </tbody>
-</table>
-<p><strong>How the pass rates were measured.</strong> Each task was run with three frontier coding agents, Claude Fable 5.1 (Claude Code), GPT-6 Astra (Codex) and Gemini 3.7 Flash (Gemini CLI), three independent trials each, inside the task's own sandbox and budget, and graded by the task's verifier. Mean pass@1 is passes divided by scored trials, averaged over the three agents. Provider-side refusals are excluded and reported separately. The reference solution passes every task whose reference is a maintainer method; for the three experimental-design tasks the shipped positive control is the strongest frozen comparator, which scores 0 by construction, and feasibility is shown by the agent passes.</p>
+    <article class="task-card" id="constitutive" aria-labelledby="title-constitutive" data-tier="1">
+      <header class="card-header">
+        <div class="eyebrow"><span class="tier-badge">Tier 1</span><span>Chemistry &amp; materials · Rheology</span></div>
+        <h2 id="title-constitutive">Constitutive protocol information</h2>
+        <p class="task-id">constitutive-protocol-information</p>
+        <p class="task-summary">Design three rheology experiments that reveal the most information about a hidden material’s relaxation spectrum.</p>
+      </header>
+      <div class="card-body">
+        <aside class="context-column" aria-label="References and inputs">
+          <section class="content-section">
+            <h3><span class="section-icon" aria-hidden="true">↗</span>Reference</h3>
+            <p>Adaptive and Bayesian experimental design for constitutive models.</p>
+            <a class="reference-link" href="https://doi.org/10.1016/j.cma.2023.116282">Villarreal et al. <span>2023 ↗</span></a>
+            <a class="reference-link" href="https://arxiv.org/abs/2603.12365">Bhattacharya, Cao &amp; Stuart <span>2026 ↗</span></a>
+          </section>
+          <section class="content-section">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14v12H3zM6 3h8M3 9h14M8 12h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Inputs</h3>
+            <ul class="input-list">
+              <li>A complex-modulus model with a baseline, three Maxwell branches, and six unknown parameters.</li>
+              <li>Comparator source code, a local checker, and development cases with known answers.</li>
+              <li>Per hidden case: two initial frequency observations of the real and imaginary modulus with Gaussian noise, an allowed-protocol menu, and three queries. Each query returns one protocol’s noisy observation.</li>
+              <li>64 fresh cases per evaluation; hidden parameters are withheld.</li>
+            </ul>
+            <div class="budget" aria-label="Compute budget"><span>2 hours</span><span>4 vCPU</span><span>8 GB RAM</span></div>
+          </section>
+        </aside>
+        <div class="work-column">
+          <section class="content-section">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7 5-4 5 4 5m6-10 4 5-4 5m-2-12-2 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Task</h3>
+            <p>Build an adaptive method that chooses frequency protocols to maximise information about a three-branch Maxwell relaxation spectrum, outperforming three design baselines given the same information.</p>
+            <p>Submit <code>main.py</code>. For each case, issue exactly <strong>three distinct protocol queries</strong>, then return a positive, finite six-parameter estimate.</p>
+            <div class="callout"><span class="callout-label">What is measured</span>The score measures the information gathered by the experiments. The final parameter estimate is checked for validity.</div>
+          </section>
+          <section class="content-section verification">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5l6-3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m7 9 2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Verification</h3>
+            <dl class="verification-list">
+              <div><dt>Metric</dt><dd>Negative log-determinant of the Fisher information matrix, evaluated at the true parameters over the initial and selected measurements, with a small ridge. Lower loss is better.</dd></div>
+              <div><dt>Comparators</dt><dd>A fixed prior-linearised design, a sequential Fisher-information design, and an importance-weighted posterior design. All use the same cases and available information.</dd></div>
+              <div><dt>Pass criteria</dt><dd>A one-sided exact sign test with <code>p &lt; 0.05/3</code> against each of the three comparators, plus a positive mean gain against each.</dd></div>
+              <div><dt>Validity</dt><dd>Correct output shape, positive and finite estimates, and exactly three distinct allowed protocols per case. Evaluation runs in an isolated environment.</dd></div>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </article>
 
-<h2>The six tasks</h2>
+    <article class="task-card" id="optical-mapping" aria-labelledby="title-optical-mapping" data-tier="2">
+      <header class="card-header">
+        <div class="eyebrow"><span class="tier-badge">Tier 2</span><span>Clinical &amp; health sciences · Cardiac electrophysiology</span></div>
+        <h2 id="title-optical-mapping">Optical mapping activation maps</h2>
+        <p class="task-id">optical-mapping-activation-maps</p>
+        <p class="task-summary">Turn a raw camera recording of beating cardiac tissue into activation-time and action-potential-duration maps that match an expert’s analysis.</p>
+      </header>
+      <div class="card-body">
+        <aside class="context-column" aria-label="References and inputs">
+          <section class="content-section">
+            <h3><span class="section-icon" aria-hidden="true">↗</span>Reference</h3>
+            <a class="reference-link" href="https://doi.org/10.1113/JP283683">Delshad, Cherry et al. <span>2023 ↗</span></a>
+            <p><em>The Journal of Physiology</em>. Method reference, with an unpublished Fenton-lab recording from Georgia Tech processed by the lab’s expert.</p>
+          </section>
+          <section class="content-section">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14v12H3zM6 3h8M3 9h14M8 12h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Inputs</h3>
+            <ul class="input-list">
+              <li>One 250 MB, 16-bit recording: 128 × 128 pixels, 529.09 frames/s, and 7,620 frames spanning 18 beats.</li>
+              <li>A vendor header and per-frame layout. The stream is transposed, frame 0 is under-exposed, and fluorescence polarity is undocumented.</li>
+              <li>Fixed definitions for activation time (interpolated 50% upstroke crossing), APD80, and beat detection.</li>
+              <li>A Python scientific stack, without internet access. Expert maps and the tissue mask are withheld.</li>
+            </ul>
+            <div class="budget" aria-label="Compute budget"><span>2 hours</span><span>4 vCPU</span><span>16 GB RAM</span></div>
+          </section>
+        </aside>
+        <div class="work-column">
+          <section class="content-section">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7 5-4 5 4 5m6-10 4 5-4 5m-2-12-2 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Task</h3>
+            <p>Segment the tissue and recover its electrical activation and action-potential duration at 80% repolarisation (APD80), averaging over usable beats.</p>
+            <p>Submit <strong>three 128 × 128 maps</strong>: a tissue mask, activation time in milliseconds, and APD80 in milliseconds. Include the reproducible analysis pipeline.</p>
+            <p>Provide a methods summary covering the approach, what the method targets, validation performed, budget used, and limitations.</p>
+          </section>
+          <section class="content-section verification">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5l6-3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m7 9 2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Verification</h3>
+            <dl class="verification-list">
+              <div><dt>Metric</dt><dd>Activation-map RMSE against the expert map within the intersection of the masks, after removing each map’s median offset. APD80 RMSE is a gated secondary metric.</dd></div>
+              <div><dt>Mask quality</dt><dd>Cover at least 85% of the expert’s tissue, with intersection over union (IoU) ≥ 0.55. Hidden gates check the mask outline and the smoothness of both maps.</dd></div>
+              <div><dt>Pass criteria</dt><dd>Activation error below one camera frame (<strong>1.89 ms</strong>), APD80 error below two frames (<strong>3.78 ms</strong>), all mask and smoothness gates satisfied, and the methods file present.</dd></div>
+              <div><dt>Integrity checks</dt><dd>The deterministic grader reads submitted arrays without executing submitted code. Validity probes include label permutation, the wrong upstroke definition, reversed polarity, and a missing transpose.</dd></div>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </article>
 
-<section class="card t2" id="optical-mapping">
-  <h3>optical-mapping-activation-maps <span class="tier t2">Tier 2</span></h3>
-  <p class="meta">Clinical, health and population: cardiac electrophysiology. Image and field data. Version 0.3.</p>
-  <p class="hook">From a raw voltage-dye camera stream of beating cardiac tissue, recover the per-pixel activation-time and APD80 maps an expert produces, with a tissue mask an expert would accept.</p>
-  <dl>
-    <dt>Reference</dt>
-    <dd>Delshad, Cherry et al., <em>J. Physiol.</em> 2023, <a href="https://doi.org/10.1113/JP283683">10.1113/JP283683</a> (method); an unpublished Fenton-lab recording (Georgia Tech) processed by the lab's expert.</dd>
-    <dt>Inputs</dt>
-    <dd>One 250 MB raw recording: 128&times;128 pixels, 16-bit, 529.09 frames per second, 7,620 frames covering 18 beats, with a vendor header and per-frame layout. The stream is stored transposed, frame 0 is under-exposed and the sign convention of the fluorescence signal is undocumented. The frozen definitions of activation time (50&nbsp;% upstroke crossing, linearly interpolated), APD80 and beat detection are given. Python scientific stack, no internet. Withheld: the expert's activation, APD80 and mask maps.</dd>
-    <dt>Task</dt>
-    <dd>Segment the tissue and submit three 128&times;128 maps (tissue mask, activation time in ms, APD80 in ms), each averaged over the usable beats, together with the reproducible pipeline and a methods summary with fixed sections: approach, what the method targets, validation performed, budget used, limitations.</dd>
-    <dt>Verification</dt>
-    <dd>A deterministic grader scores the submitted arrays, so nothing the agent wrote is executed. Primary metric: activation-map RMSE in ms against the expert's map inside the intersection of the two masks after removing each map's median offset; APD80 RMSE is a gated secondary. Validity: the mask must cover at least 85&nbsp;% of the expert's tissue with IoU at least 0.55, which rules out both the whole frame and the easy centre. Pass: valid, methods file present, activation error under one camera frame (1.89 ms) and APD80 error under two frames (3.78 ms), plus expert-likeness gates on the mask outline and the smoothness of both maps whose values are deliberately not disclosed to the agent. Anchors: a constant map 19.3 ms; wrong upstroke definition 5.5 ms; wrong polarity 6.1 ms; skipping denoising 2.5 ms and fails a gate; the reference pipeline 0.57 ms in about 10 s of compute; the beat-to-beat noise floor 0.3 to 0.7 ms. Shipped validity probes: label permutation, wrong definition, wrong polarity, no transpose.</dd>
-    <dt>Calibration</dt>
-    <dd>Fable 0/3, Astra 0/3, Gemini 0/3; mean pass@1 0.00. Fable and Astra reach 0.8 to 1.2 ms activation error, inside the frame gate, but hand in ragged masks and rough maps that an expert would reject and the expert-likeness gates catch. The reference passes with margin.</dd>
-  </dl>
-  <p class="why"><strong>Why it is here.</strong> A real lab pipeline on real, unpublished data with the expert's own output as the ground truth (practical, verifiable as a final answer); cheap to run yet unsolved by all nine trials (stumping); a multi-step pipeline with file deliverables and a written self-validation (agentic).</p>
-</section>
-
-<section class="card t3" id="phosphopeptide">
-  <h3>phosphopeptide-evidence-inference <span class="tier t3">Tier 3</span></h3>
-  <p class="meta">Life sciences: phosphoproteomics. Spectra. GPU task (one A10G). Version 0.1.0.</p>
-  <p class="hook">De novo sequence phosphopeptides and place their phosphosites from tandem mass spectra, recovering more correct identities than the published decoder while holding the false-discovery proportion at or below 5&nbsp;%.</p>
-  <dl>
-    <dt>Reference</dt>
-    <dd>Marx et al., <em>Nat. Biotechnol.</em> 2013, <a href="https://doi.org/10.1038/nbt.2585">10.1038/nbt.2585</a>: synthetic phosphopeptide libraries with a designed phosphosite per pool (PRIDE <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD000138">PXD000138</a>); the published InstaNovo-P de novo sequencing checkpoint as the baseline model.</dd>
-    <dt>Inputs</dt>
-    <dd>A development set of 6,302 spectra with truth, 221,825 labelled training spectra that share no peptide backbone with either panel, the InstaNovo-P checkpoint and its decoding code, working implementations of every comparator with their development scores, and the evaluation code. Sealed: about 13,500 spectra in blocks; the primary stratum is the synthetic library pools, whose designed phosphosite is the truth. Eight hours on 8 vCPU, 64 GB and one A10G.</dd>
-    <dt>Task</dt>
-    <dd>Submit a <code>run.py</code> that writes one prediction per spectrum (sequence, modification positions, a confidence in [0, 1] and an accept or abstain decision), a <code>method.json</code> naming the methodological change and the ablation that removes it, and a methods summary. The ablation variant must also run.</dd>
-    <dt>Verification</dt>
-    <dd>The submitted program is replayed on the sealed panel on a GPU with no network. Identities are canonicalised (I/L collapsed, common modifications normalised, phosphosites kept). Utility is the fraction of distinct correct identities recovered by accepted predictions, per block, averaged over blocks and strata; abstaining on everything scores 0. Gates: pooled false-discovery proportion at most 5&nbsp;% (the operating point the source paper uses), at most 10&nbsp;% in any stratum, precursor-mass consistency at least 95&nbsp;%. Pass: against every frozen comparator (the published decoder as shipped and as tuned, a decoder ensemble, a recalibrated rescoring reference and a non-phospho de novo model) the paired stratified cluster-bootstrap lower bound of the yield difference exceeds a preset margin, and every gate holds. The recalibrated reference is packaged as the positive control and scores 0 by construction, because a copy of a comparator cannot pass.</dd>
-    <dt>Calibration</dt>
-    <dd>Fable 1/3, Astra 0/3, Gemini 0/3; mean pass@1 0.11. The passing run built a transductive library prior with precursor-mass-constrained candidate enumeration and reached 7.2 times the reference yield at 3.4&nbsp;% false discoveries in 118 minutes. Every other scored run also beat the frozen decoders on yield but failed error control (false-discovery proportions of 6.7 to 20&nbsp;%), which is exactly the discipline the task asks for.</dd>
-  </dl>
-  <p class="why"><strong>Why it is here.</strong> Real public spectra, a published model and the field's own error-rate operating point (practical); an eight-hour GPU pipeline with code, ablation and written methods as deliverables (agentic); a relative comparator test combined with an absolute error gate (verifiable); one pass in nine (stumping).</p>
-</section>
-
-<section class="card t3" id="strain-assembly">
-  <h3>strain-resolved-assembly <span class="tier t3">Tier 3</span></h3>
-  <p class="meta">Life sciences: metagenomics. Sequence data. Edition 0.2.0.</p>
-  <p class="hook">From long-read mixtures of two or three closely related bacterial strains, assemble correctly phased strain haplotypes that keep long-range allele linkage, beating today's metagenome assemblers and the shipped phasing baselines.</p>
-  <dl>
-    <dt>Reference</dt>
-    <dd>Complete RefSeq chromosomes of nonpathogenic strains (for example <em>E. coli</em> K-12 MG1655 against BL21(DE3), 99.2&nbsp;% identity); reads simulated from them with pbsim3 (ONT R10-like, about 99&nbsp;% accuracy, 12 kb). Assemblers under test: myloasm, metaMDBG, metaFlye.</dd>
-    <dt>Inputs</dt>
-    <dd>Five development mixtures, one per regime, as reads plus mixture metadata (strain count, abundances and species undisclosed) with full truth (strain genomes, read origins), a re-simulator to make more, the installed tool chain (myloasm, metaMDBG, Flye, minimap2, samtools, seqkit, racon), the comparators' code and development scores, and the evaluation code. Sealed: 15 mixtures across five regimes (97 to 99.9&nbsp;% identity, 1:1 to 6:1 abundance, shared repeats, a recombinant mosaic, real strain pairs) built from genomes absent from development, about 1.7 Gb of reads. Eight hours on 16 vCPU and 64 GB.</dd>
-    <dt>Task</dt>
-    <dd>Submit a <code>run.py</code> that, for every mixture, writes the phased haplotypes (FASTA), the assembly graph (GFA), read assignments and a per-contig phase confidence, plus a <code>method.json</code> and a methods summary. An ablation variant must also run.</dd>
-    <dt>Verification</dt>
-    <dd>Offline replay under an unprivileged user. Contigs are aligned to each truth strain; a segmentation over an event grid splits them at misjoins and phase switches; each truth interval is credited once. Utility rewards long, correctly phased stretches (sum of squared segment lengths normalised by the strain length), averaged over strains and mixtures. Gates on the panel: falsely joined bases, phase switches per Mb, consensus quality (QV at least 30), duplication, false contigs and unaligned fraction. Pass: the paired stratified bootstrap lower bound of the utility gain exceeds a preset margin against every frozen comparator (default and tuned myloasm configurations, metaMDBG, metaFlye), and is positive against the packaged phasing baselines and an assembler-tuning control, with all gates holding. Anchors: perfect haplotypes 1.0; a single collapsed consensus 0.5; the best frozen assembler configuration is the reference and scores 0 by construction.</dd>
-    <dt>Calibration</dt>
-    <dd>Astra 0/3 and Gemini 0/3 under edition 0.2.0; Fable's three trials were refused at the first turn by the provider's safety classifier and are excluded. Mean pass@1 0.00 over six scored trials. Under the first edition one Astra run beat the assemblers after 221 minutes (31 of 33 strains recovered at 90&nbsp;%, one phase switch, QV 45.5); the phasing controls added in 0.2.0 now also have to be beaten.</dd>
-  </dl>
-  <p class="why"><strong>Why it is here.</strong> The most tool-heavy task in the pool: the assemblers metagenomics labs use today, driven from an eight-hour pipeline that delivers four files per mixture (agentic by design, practical); a sealed panel with frozen comparators and hard quality gates (verifiable); unsolved at the current edition (stumping).</p>
-</section>
-
-<section class="card t1" id="rare-event">
-  <h3>rare-event-committor-transfer <span class="tier t1">Tier 1</span></h3>
-  <p class="meta">Mathematics, statistics and scientific ML: rare-event inference. Interactive simulation. Version 0.1.0.</p>
-  <p class="hook">Choose three shooting experiments on a two-lane, 15-site reversible ladder and infer the committor, the probability of reaching state B before state A, at ten states under two force settings outside the measured range, beating three frozen experimental-design baselines.</p>
-  <dl>
-    <dt>Reference</dt>
-    <dd>Marchi, Kang and Parrinello, <a href="https://arxiv.org/abs/2410.17029">arXiv:2410.17029</a>; WESTPA 2.0, Russo et al. 2022, <a href="https://doi.org/10.1021/acs.jctc.1c01154">10.1021/acs.jctc.1c01154</a>. Solving the committor system at known parameters is easy; the task tests inference under a hard limit on shooting observations.</dd>
-    <dt>Inputs</dt>
-    <dd>The forward model (within-lane and cross-lane conductances set by two Gaussian barriers, an antisymmetric term and a linear force tilt), the full source of the three comparator methods, a local checker and a generator that makes development cases with truth. For each hidden case the verifier streams JSON lines: initial observations, the allowed actions (a state and a force in {&minus;0.7, 0, 0.7}) and a budget of three queries; every query returns the number of successes out of 640 binomial shooting trials. Truth and seeds are withheld; each run draws 64 fresh cases from a 128-bit seed. Two hours on 4 vCPU and 8 GB.</dd>
-    <dt>Task</dt>
-    <dd>Submit a <code>main.py</code> that runs the loop for each case: issue exactly three distinct queries, then answer with 20 committor probabilities (two target forces of &plusmn;1.15, two lanes, five sites each).</dd>
-    <dt>Verification</dt>
-    <dd>Loss per case is the mean squared error of the 20 probabilities against the exact committor, scaled by a per-task target scale. Three frozen same-information comparators run on the same cases with the same observations: a fixed prior-linearised design with a nonlinear fit, a sequential Fisher-information design with a fit, and an importance-weighted posterior design and prediction. For each comparator the per-case loss differences feed a one-sided exact binomial sign test; pass requires p &lt; 0.05/3 against all three together with a positive mean gain against each. Validity gates on shape, finiteness and range; malformed output scores 0; a copy of any comparator cannot pass. Fresh instances are generated for every run.</dd>
-    <dt>Calibration</dt>
-    <dd>Fable 0/3, Astra 1/3, Gemini 0/3; mean pass@1 0.11. The passing run used an importance-weighted calibration method and took 46 minutes; the other eight runs beat the fixed and sequential designs but not the posterior one. The shipped positive control is the posterior comparator itself, so it scores 0 by construction.</dd>
-  </dl>
-  <p class="why"><strong>Why it is here.</strong> The cleanest Tier 1 recipe in the pool: exact generator truth, instances regenerated on demand so nothing can be memorised, and a closed experiment-design loop the agent has to drive (agentic); cheap and quick, yet it held eight of nine runs (stumping); a paired statistical test against strong frozen baselines (verifiable).</p>
-</section>
-
-<section class="card t1" id="constitutive">
-  <h3>constitutive-protocol-information <span class="tier t1">Tier 1</span></h3>
-  <p class="meta">Chemistry and materials: rheology of viscoelastic materials. Interactive simulation. Version 0.1.0.</p>
-  <p class="hook">For each hidden material, choose three rheology frequency protocols that maximise the information about a three-branch Maxwell relaxation spectrum, and beat three same-information design baselines on the resulting information loss.</p>
-  <dl>
-    <dt>Reference</dt>
-    <dd>Villarreal et al. 2023, <a href="https://doi.org/10.1016/j.cma.2023.116282">10.1016/j.cma.2023.116282</a>; Bhattacharya, Cao and Stuart 2026, <a href="https://arxiv.org/abs/2603.12365">arXiv:2603.12365</a>. Adaptive and Bayesian design of experiments for constitutive models is established practice; the task asks for a method that beats competent implementations of it.</dd>
-    <dt>Inputs</dt>
-    <dd>The physics (a complex modulus with a baseline and three Maxwell branches, six unknown parameters), the comparators' source, a local checker and development cases with truth. For each hidden case: two initial frequency observations of the real and imaginary modulus with Gaussian noise, the menu of allowed protocols and a three-query budget; each query returns one protocol's noisy observation. Sixty-four fresh cases per run; truth withheld. Two hours on 4 vCPU and 8 GB.</dd>
-    <dt>Task</dt>
-    <dd>Submit a <code>main.py</code> that issues exactly three distinct protocol queries per case and ends with a six-parameter estimate. The estimate must be positive and finite, but it is the information gathered, not the estimate, that is scored.</dd>
-    <dt>Verification</dt>
-    <dd>The verifier forms the Fisher information matrix at the true parameters over the initial and chosen measurements (with a small ridge) and scores the loss as minus its log-determinant. The same three frozen comparators as above run on the same cases; the same rule applies: one-sided exact sign test with p &lt; 0.05/3 against each comparator plus a positive mean gain, validity gates on shape, finiteness and distinct protocols, and an isolated execution environment.</dd>
-    <dt>Calibration</dt>
-    <dd>Fable 1/3, Astra 1/3, Gemini 0/3; mean pass@1 0.22, the highest of the six design tasks. Every evaluated run beats the fixed design; the posterior comparator stops the rest.</dd>
-  </dl>
-  <p class="why"><strong>Why it is here.</strong> A materials-science instance of the same controlled-generator design (Tier 1 coverage in a second domain), with two agent passes that prove the bar is reachable and seven failures that show it is not low.</p>
-</section>
-
-<section class="card t1" id="isotopomer">
-  <h3>transient-isotopomer-experiment-design <span class="tier t1">Tier 1</span></h3>
-  <p class="meta">Life sciences: metabolic isotope tracing. Interactive simulation. Version 0.1.0.</p>
-  <p class="hook">Choose three positional <sup>13</sup>C tracer mixtures for a transient labelling experiment, then predict the unseen mass-fragment measurements and estimate two carbon-routing fractions, beating three frozen design baselines.</p>
-  <dl>
-    <dt>Reference</dt>
-    <dd>INCA 2.0, Rahim et al. 2022, <a href="https://doi.org/10.1016/j.ymben.2021.12.009">10.1016/j.ymben.2021.12.009</a>; Jadebeck et al. 2026, <a href="https://arxiv.org/abs/2605.25079">arXiv:2605.25079</a>. Tracer design is the expensive step of non-stationary metabolic flux analysis.</dd>
-    <dt>Inputs</dt>
-    <dd>A three-carbon, atom-conserving transit surrogate: eight isotopomers, a direct route and two cyclic permutations mixed by two routing fractions, fast and slow pools with their time constants; measured channels are the intact three-carbon fragment and two two-carbon fragments with Gaussian noise. The comparators' source, a local checker and development cases with truth are given. For each hidden case: initial observations, the allowed tracer mixtures and three queries. Two hours on 4 vCPU and 8 GB.</dd>
-    <dt>Task</dt>
-    <dd>Submit a <code>main.py</code> that issues three tracer queries per case and answers with 23 values: the two routing fractions and a seven-bin fragment distribution at each target time for the target tracer, every block summing to at most one.</dd>
-    <dt>Verification</dt>
-    <dd>Mean squared error against the noise-free truth, scaled by the task's target scale, compared case by case with the same three frozen comparators under the same sign-test rule (p &lt; 0.05/3 against each, positive mean gain) and validity gates.</dd>
-    <dt>Calibration</dt>
-    <dd>Fable 0/3, Astra 1/3, Gemini 0/3; mean pass@1 0.11. The passing run used a conditional design method; Fable's runs were even against every comparator and Gemini twice resubmitted the public posterior policy, which cannot pass.</dd>
-  </dl>
-  <p class="why"><strong>Why it is here.</strong> A life-science generator task whose question a metabolic engineer actually asks before a labelling experiment (practical), with exact truth and on-demand instances (verifiable, contamination-resistant) and a single pass in nine (stumping).</p>
-</section>
-
-<footer>
-  <p>Descriptions are abbreviated from the maintainers' task READMEs on 2026-09-28. Pass rates are from the calibration rounds recorded with each task (three trials per agent). Verifier gate values that are deliberately hidden from the agent, sealed reference scores and sealed answers are not listed. The task packages live in a private repository; access on request.</p>
-</footer>
-</main>
+    <article class="task-card" id="strain-assembly" aria-labelledby="title-strain-assembly" data-tier="3">
+      <header class="card-header">
+        <div class="eyebrow"><span class="tier-badge">Tier 3</span><span>Life sciences · Metagenomics</span></div>
+        <h2 id="title-strain-assembly">Strain-resolved assembly</h2>
+        <p class="task-id">strain-resolved-assembly</p>
+        <p class="task-summary">Assemble closely related bacterial strains from mixed long reads, preserving long-range allele linkage and improving on frozen assembly baselines.</p>
+      </header>
+      <div class="card-body">
+        <aside class="context-column" aria-label="References and inputs">
+          <section class="content-section">
+            <h3><span class="section-icon" aria-hidden="true">↗</span>Reference</h3>
+            <p>Complete RefSeq chromosomes of nonpathogenic strains, including <em>E. coli</em> K-12 MG1655 and BL21(DE3) at 99.2% identity.</p>
+            <p>Reads are simulated with <strong>pbsim3</strong>: ONT R10-like, approximately 99% accurate, and 12 kb long. Reference assemblers are myloasm, metaMDBG, and metaFlye.</p>
+          </section>
+          <section class="content-section">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14v12H3zM6 3h8M3 9h14M8 12h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Inputs</h3>
+            <ul class="input-list">
+              <li>Five development mixtures with reads, mixture metadata, full truth genomes and read origins, plus a re-simulator. Strain counts, abundances, and species are undisclosed in the mixture metadata.</li>
+              <li>myloasm, metaMDBG, Flye, minimap2, samtools, seqkit, and racon; comparator code, development scores, and evaluation code.</li>
+              <li>Hidden evaluation: 15 mixtures from genomes absent from development, totalling about 1.7 Gb of reads.</li>
+              <li>Five regimes span 97–99.9% identity, 1:1–6:1 abundance, shared repeats, a recombinant mosaic, and real strain pairs.</li>
+            </ul>
+            <div class="budget" aria-label="Compute budget"><span>8 hours</span><span>16 vCPU</span><span>64 GB RAM</span></div>
+          </section>
+        </aside>
+        <div class="work-column">
+          <section class="content-section">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7 5-4 5 4 5m6-10 4 5-4 5m-2-12-2 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Task</h3>
+            <p>Build a pipeline that separates mixtures of two or three closely related strains into correctly phased haplotypes, retaining long-range allele linkage.</p>
+            <p>Submit <code>run.py</code> to produce, for each mixture, <strong>phased haplotypes (FASTA), an assembly graph (GFA), read assignments, and per-contig phase confidence</strong>.</p>
+            <p>Include <code>method.json</code>, a methods summary, and an executable ablation variant.</p>
+          </section>
+          <section class="content-section verification">
+            <h3><svg class="section-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5l6-3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m7 9 2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Verification</h3>
+            <dl class="verification-list">
+              <div><dt>Metric</dt><dd>Contigs are aligned to hidden truth genomes and split at misjoins and phase switches; each truth interval is credited once. Utility rewards long, correctly phased segments using squared segment lengths normalised by strain length, averaged over strains and mixtures.</dd></div>
+              <div><dt>Quality gates</dt><dd>Limits on falsely joined bases, phase switches per Mb, duplication, false contigs, and unaligned sequence, with consensus quality <strong>QV ≥ 30</strong>.</dd></div>
+              <div><dt>Pass criteria</dt><dd>The paired stratified bootstrap lower bound on utility gain must exceed a preset margin against every frozen assembler comparator: default and tuned myloasm, metaMDBG, and metaFlye. It must also be positive against packaged phasing baselines and an assembler-tuning control, with every quality gate satisfied.</dd></div>
+              <div><dt>Evaluation</dt><dd>Submitted code is replayed offline under an unprivileged user on the hidden mixtures, within the fixed compute budget.</dd></div>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
 </body>
 </html>
